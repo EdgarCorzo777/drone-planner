@@ -6,7 +6,9 @@ const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY
 document.querySelector('#app').innerHTML = `
   <div class="app-container">
     <header>
-      <div class="drone-illustration">🚁</div>
+      <div class="drone-illustration">
+        <img src="/src/assets/drone.jpg" alt="Drone illustration" style="width: 100%; height: 100%; object-fit: contain;">
+      </div>
       <h1>Drone <span>Planner</span></h1>
       <p>Planificación inteligente de rutas para drones agrícolas</p>
     </header>
@@ -201,7 +203,7 @@ Genera un plan de ruta detallado que incluya:
 7. Tiempo estimado de operación
 8. 2 recomendaciones específicas para este cultivo
 
-Sé concreto con números reales. Responde en español. Usa markdown para formato.`
+Sé concreto con números reales. **Responde SIEMPRE en español.** Usa markdown para formato.`
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
