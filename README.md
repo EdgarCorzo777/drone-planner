@@ -98,15 +98,20 @@ This generates a `dist` folder with optimized static files ready for deployment.
 5. Deploy
 
 ## Project Structure
+
+```
 drone-planner/
 ├── src/
 │   ├── main.js          # App logic and AI integration
-│   ├── style.css        # Styling
+│   ├── style.css        # Styling with agricultural theme
 │   └── assets/          # Images and icons
-├── index.html           # Entry point
-├── package.json         # Dependencies
-├── vite.config.js       # Vite configuration
-└── .env                 # API keys (not committed)
+├── index.html           # HTML entry point
+├── package.json         # Dependencies and scripts
+├── package-lock.json    # Locked dependency versions
+├── vite.config.js       # Vite build configuration
+├── .gitignore           # Git ignore rules
+└── .env                 # Environment variables (not committed to repo)
+```
 
 ## How It Works
 
