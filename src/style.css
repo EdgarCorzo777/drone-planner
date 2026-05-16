@@ -355,6 +355,22 @@ select option { background: var(--green-dark); color: var(--text-primary); }
   margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.grid-section > div:first-of-type {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+}
+
+@media (max-width: 560px) {
+  .grid-section > div:first-of-type {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
 .grid-section h3 {
