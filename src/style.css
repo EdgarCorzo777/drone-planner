@@ -305,6 +305,28 @@ select option { background: var(--green-dark); color: var(--text-primary); }
   border-collapse: collapse;
   font-size: 13px;
   margin: 1rem 0;
+  display: block;
+  overflow-x: auto;
+}
+
+.result-body table th,
+.result-body table td {
+  min-width: 80px;
+}
+
+@media (max-width: 560px) {
+  .result-body table {
+    font-size: 12px;
+  }
+  
+  .result-body th {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  
+  .result-body td {
+    padding: 6px 8px;
+  }
 }
 
 .result-body th {
