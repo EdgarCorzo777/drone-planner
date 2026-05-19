@@ -3,129 +3,233 @@ import { marked } from 'marked'
 import droneImg from './assets/drone.png'
 
 const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY
+let currentPage = 'landing' // landing o app
 
-document.querySelector('#app').innerHTML = `
-  <div class="app-container">
-    <header>
-      <div class="drone-illustration">
-        <img src="${droneImg}" alt="Drone illustration" style="width: 100%; height: 100%; object-fit: contain;">
+const app = document.querySelector('#app')
+
+// Funciones globales para navegación
+window.goToApp = function() {
+  currentPage = 'app'
+  renderApp()
+  window.scrollTo(0, 0)
+}
+
+window.goToLanding = function() {
+  currentPage = 'landing'
+  renderLanding()
+}
+
+function renderLanding() {
+  app.innerHTML = `
+    <div class="app-container">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-content">
+          <div class="drone-hero">
+            <img src="${droneImg}" alt="Drone" />
+          </div>
+          <h1>Drone <span>Planner</span></h1>
+          <p class="hero-subtitle">Planificación inteligente de rutas para drones agrícolas</p>
+          <p class="hero-description">Transforma días de planificación manual en 30 segundos. IA que entiende tu cultivo y optimiza cada rociada.</p>
+          <button class="btn-hero" onclick="goToApp()">Comenzar ahora →</button>
+        </div>
+      </section>
+
+      <!-- CARACTERÍSTICAS -->
+      <section class="features">
+        <h2>¿Por qué Drone Planner?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Instantáneo</h3>
+            <p>Genera planes en 30 segundos. Lo que antes tomaba días, ahora es inmediato.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>Impulsado por IA</h3>
+            <p>Algoritmos inteligentes que analizan tu cultivo y optimizan cada detalle.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Preciso</h3>
+            <p>Cálculos exactos de altura, velocidad, cantidad de insumo y tiempo operativo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CÓMO FUNCIONA -->
+      <section class="how-it-works">
+        <h2>¿Cómo funciona?</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Ingresa tus datos</h3>
+            <p>Tipo de cultivo, área, forma del campo, insumo y condición actual.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>La IA analiza</h3>
+            <p>Nuestro sistema procesa la información y optimiza la ruta de vuelo.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Obtén tu plan</h3>
+            <p>Recibe un plan detallado con patrón, altura, velocidad y recomendaciones.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA FINAL -->
+      <section class="cta-final">
+        <h2>¿Listo para optimizar tus operaciones?</h2>
+        <p>Prueba Drone Planner ahora sin costo alguno.</p>
+        <button class="btn-cta" onclick="goToApp()">Ir a la aplicación →</button>
+      </section>
+    </div>
+  `
+}
+
+function renderApp() {
+  app.innerHTML = `
+    <div class="app-container">
+      <button class="btn-back" onclick="goToLanding()">← Volver</button>
+
+      <header>
+        <div class="drone-illustration">
+          <img src="${droneImg}" alt="Drone illustration" />
+        </div>
+        <h1>Drone <span>Planner</span></h1>
+        <p>Planificación inteligente de rutas para drones agrícolas</p>
+      </header>
+
+      <div class="form-card">
+        <p class="form-card-title">Datos del cultivo</p>
+        <div class="form-grid">
+          <div class="field">
+            <div class="field-icon-label">
+              <div class="field-icon">🌱</div>
+              Tipo de cultivo
+            </div>
+            <input id="cultivo" type="text" placeholder="Ej: Maíz, Arroz, Café..." />
+          </div>
+          <div class="field">
+            <div class="field-icon-label">
+              <div class="field-icon">📐</div>
+              Área (hectáreas)
+            </div>
+            <input id="area" type="number" min="0.5" max="100" step="0.5" placeholder="Ej: 5" />
+          </div>
+          <div class="field">
+            <div class="field-icon-label">
+              <div class="field-icon">🗺️</div>
+              Forma del campo
+            </div>
+            <select id="forma">
+              <option value="">Selecciona...</option>
+              <option value="rectangular">Rectangular</option>
+              <option value="irregular">Irregular</option>
+              <option value="triangular">Triangular</option>
+              <option value="en L">En L</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="field-icon-label">
+              <div class="field-icon">💧</div>
+              Insumo a aplicar
+            </div>
+            <select id="insumo">
+              <option value="">Selecciona...</option>
+              <option value="agua">Agua</option>
+              <option value="fertilizante">Fertilizante</option>
+              <option value="pesticida">Pesticida</option>
+              <option value="fungicida">Fungicida</option>
+            </select>
+          </div>
+          <div class="field full">
+            <div class="field-icon-label">
+              <div class="field-icon">🔍</div>
+              Condición actual del cultivo
+            </div>
+            <select id="condicion">
+              <option value="">Selecciona...</option>
+              <option value="seco / necesita riego urgente">Seco / necesita riego urgente</option>
+              <option value="con plagas visibles">Con plagas visibles</option>
+              <option value="normal / mantenimiento">Normal / mantenimiento</option>
+              <option value="post-siembra">Post-siembra</option>
+              <option value="en floración">En floración</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-generar" id="btn-generar">Generar plan de ruta →</button>
+
+        <div class="progress-bar-container" id="progress-container">
+          <div class="progress-steps">
+            <div class="progress-step" id="step-1">
+              <div class="step-dot"></div>
+              Analizando datos del cultivo...
+            </div>
+            <div class="progress-step" id="step-2">
+              <div class="step-dot"></div>
+              Calculando patrón de vuelo óptimo...
+            </div>
+            <div class="progress-step" id="step-3">
+              <div class="step-dot"></div>
+              Estimando insumos y tiempos...
+            </div>
+            <div class="progress-step" id="step-4">
+              <div class="step-dot"></div>
+              Generando plan final...
+            </div>
+          </div>
+        </div>
       </div>
-      <h1>Drone <span>Planner</span></h1>
-      <p>Planificación inteligente de rutas para drones agrícolas</p>
-    </header>
 
-    <div class="form-card">
-      <p class="form-card-title">Datos del cultivo</p>
-      <div class="form-grid">
-        <div class="field">
-          <div class="field-icon-label">
-            <div class="field-icon">🌱</div>
-            Tipo de cultivo
-          </div>
-          <input id="cultivo" type="text" placeholder="Ej: Maíz, Arroz, Café..." />
+      <div class="result-card" id="result-card">
+        <div class="result-header">
+          <h2 id="result-title">Plan generado</h2>
+          <span class="badge">✓ Listo</span>
         </div>
-        <div class="field">
-          <div class="field-icon-label">
-            <div class="field-icon">📐</div>
-            Área (hectáreas)
+        <div class="result-body" id="result-body"></div>
+        <div class="grid-section">
+          <h3>Vista esquemática del campo</h3>
+          <div class="grid-wrapper">
+            <div id="field-grid"></div>
           </div>
-          <input id="area" type="number" min="0.5" max="100" step="0.5" placeholder="Ej: 5" />
-        </div>
-        <div class="field">
-          <div class="field-icon-label">
-            <div class="field-icon">🗺️</div>
-            Forma del campo
-          </div>
-          <select id="forma">
-            <option value="">Selecciona...</option>
-            <option value="rectangular">Rectangular</option>
-            <option value="irregular">Irregular</option>
-            <option value="triangular">Triangular</option>
-            <option value="en L">En L</option>
-          </select>
-        </div>
-        <div class="field">
-          <div class="field-icon-label">
-            <div class="field-icon">💧</div>
-            Insumo a aplicar
-          </div>
-          <select id="insumo">
-            <option value="">Selecciona...</option>
-            <option value="agua">Agua</option>
-            <option value="fertilizante">Fertilizante</option>
-            <option value="pesticida">Pesticida</option>
-            <option value="fungicida">Fungicida</option>
-          </select>
-        </div>
-        <div class="field full">
-          <div class="field-icon-label">
-            <div class="field-icon">🔍</div>
-            Condición actual del cultivo
-          </div>
-          <select id="condicion">
-            <option value="">Selecciona...</option>
-            <option value="seco / necesita riego urgente">Seco / necesita riego urgente</option>
-            <option value="con plagas visibles">Con plagas visibles</option>
-            <option value="normal / mantenimiento">Normal / mantenimiento</option>
-            <option value="post-siembra">Post-siembra</option>
-            <option value="en floración">En floración</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn-generar" id="btn-generar">Generar plan de ruta →</button>
-
-      <div class="progress-bar-container" id="progress-container">
-        <div class="progress-steps">
-          <div class="progress-step" id="step-1">
-            <div class="step-dot"></div>
-            Analizando datos del cultivo...
-          </div>
-          <div class="progress-step" id="step-2">
-            <div class="step-dot"></div>
-            Calculando patrón de vuelo óptimo...
-          </div>
-          <div class="progress-step" id="step-3">
-            <div class="step-dot"></div>
-            Estimando insumos y tiempos...
-          </div>
-          <div class="progress-step" id="step-4">
-            <div class="step-dot"></div>
-            Generando plan final...
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:rgba(74,222,128,0.25);border:1px solid #4ade80"></div> Inicio
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:rgba(26,74,42,0.8);border:1px solid rgba(74,222,128,0.3)"></div> Ruta
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:rgba(239,68,68,0.2);border:1px solid rgba(239,68,68,0.5)"></div> Fin
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:rgba(45,122,69,0.2);border:1px solid rgba(45,122,69,0.3)"></div> Campo
+            </div>
           </div>
         </div>
       </div>
     </div>
+  `
+  document.getElementById('btn-generar').addEventListener('click', generarPlan)
+}
 
-    <div class="result-card" id="result-card">
-      <div class="result-header">
-        <h2 id="result-title">Plan generado</h2>
-        <span class="badge">✓ Listo</span>
-      </div>
-      <div class="result-body" id="result-body"></div>
-      <div class="grid-section">
-        <h3>Vista esquemática del campo</h3>
-        <div id="field-grid"></div>
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background:rgba(74,222,128,0.25);border:1px solid #4ade80"></div> Inicio
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:rgba(26,74,42,0.8);border:1px solid rgba(74,222,128,0.3)"></div> Ruta
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:rgba(239,68,68,0.2);border:1px solid rgba(239,68,68,0.5)"></div> Fin
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:rgba(45,122,69,0.2);border:1px solid rgba(45,122,69,0.3)"></div> Campo
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-`
+function goToLanding() {
+  currentPage = 'landing'
+  renderLanding()
+}
 
-document.getElementById('btn-generar').addEventListener('click', generarPlan)
+function goToApp() {
+  currentPage = 'app'
+  renderApp()
+  window.scrollTo(0, 0)
+}
 
+renderLanding()
+
+// RESTO DEL CÓDIGO (igual que antes)
 let stepInterval = null
 
 function startProgress() {
