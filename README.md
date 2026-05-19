@@ -48,16 +48,21 @@ npm run dev
 
 ## Usage
 
-1. Enter your crop details:
+1. **Landing Page** — Learn about Drone Planner and its benefits
+   - Overview of features
+   - How it works (3-step process)
+   - Call-to-action to start planning
+
+2. **Plan Generation** — Enter your crop details:
    - Crop type (Corn, Coffee, Rice, etc.)
    - Field area in hectares
    - Field shape (rectangular, irregular, triangular, L-shaped)
    - Input to apply (water, fertilizer, pesticide, fungicide)
    - Current crop condition
 
-2. Click "Generate route plan"
+3. Click "Comenzar ahora" (Get Started) to access the planning tool
 
-3. AI will analyze and generate:
+4. AI will analyze and generate:
    - Optimal flight pattern recommendation
    - Flight altitude and speed
    - Estimated chemical quantity needed
@@ -66,7 +71,7 @@ npm run dev
    - Total operation time
    - Crop-specific recommendations
 
-4. Visual grid shows the flight path with start (S) and end (E) markers
+5. Visual grid shows the flight path with start (S) and end (E) markers
 
 ## Build for Production
 
