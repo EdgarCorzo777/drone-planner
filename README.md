@@ -151,7 +151,9 @@ No license - feel free to use this project for personal or commercial purposes.
 
 ## Author
 
-Created as part of a precision agriculture automation project using AI-powered drone optimization.
+- **Edgar Corzo**
+- **Maria Chavarriaga**
+- **Julio Ariza**
 
 ## Support
 
